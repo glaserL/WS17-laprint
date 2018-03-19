@@ -1,7 +1,7 @@
 # Fingerprinting for Learning Analytics
 Student fingerprinting service for Learning Analytics Seminar @ Goethe University Frankfurt WS17/18 
 
-The seminar paper is located in `/docs`, while the whole service written mostly in python is located in `/laprint`.
+The seminar paper is located in `paper/`, while the whole service written mostly in python is located in `laprint/`.
 
 ## Installing
 
