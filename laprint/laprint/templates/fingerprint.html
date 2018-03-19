@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block body%}
+<head>
+	<script language="javascript" type=text/javascript>
+
+window.onload = function() {
+			// initially hiding the guessphrase input field
+	var guessform = document.getElementsByName("guessphraseform");
+	for (i = 0; i < guessform.length; i++){
+		document.getElementById(guessform.item(i).id).style.display = "none";
+		document.getElementById(guessform.item(i).id).disabled = true;
+	}
+
+	var guess = '{{guess}}'; // inserting the jinja variable of guess
+	var guessdiv = document.getElementsByName("guessform");
+	if (guess) {
+				guessdiv.disabled = false;
+			}
+			else {
+				document.getElementById("guessform").style.display = "none";
+				document.getElementById("guessform").disabled = true;
+			}
+		}
+
+		function showHideGuessphrase(answer){
+			var guessform = document.getElementsByName("guessphraseform");
+			if (answer=="yes"){
+
+		for (i = 0; i < guessform.length; i++){
+			document.getElementById(guessform.item(i).id).style.display = "none";
+			document.getElementById(guessform.item(i).id).disabled = true;
+		}
+	}
+	if (answer=="no"){
+		
+		for (i = 0; i < guessform.length; i++){
+			document.getElementById(guessform.item(i).id).style.display = "inline";
+			document.getElementById(guessform.item(i).id).disabled = false;
+		}
+	}
+
+}
+	</script>
+
+</head>
+<div class=text> Thank you for helping me! 
+	        <p> Please fill out the form below correctly. If I think I saw your fingerprint already, I will present you that <em>guessphrase</em> that you have entered when visiting earlier. This can be anything, I suggest making it something personal that you can easily recognize it again.</p>
+</div>
+<form id = "fingerprint_form" action="{{ url_for('laprint.addNew') }}" method = post>
+	<div name = "guessform" id = "guessform">
+		<p> I have found a fingerprint that correspondents to yours. It's guessphrase is: <em>{{guess}}</em>.
+		</p>
+		<label class="guesslabel">Was my guess right?</label>
+		<div class="">
+			<div style = "text-indent:2em;">
+				<input type="radio" name="guessfb" value="yes"> Yes </input>
+			</div>
+		</div>
+		<div class="">
+			<div style = "text-indent:2em;">
+				<input type="radio" name="guessfb"  value="no"> No </input>
+			</div>
+		</div>
+	</div>
+	<div class="visitedform">
+		<label class="visitedlabel">Have you already visited?</label>
+		<div class="">
+			<div style = "text-indent:2em;">
+				<input type="radio" name="visitedfb" onchange="showHideGuessphrase(this.value)" value="yes" checked> Yes </input>
+			</div>
+		</div>
+		<div class = "">
+			<div style = "text-indent:2em;">
+				<input type="radio" name="visitedfb" onchange="showHideGuessphrase(this.value)" value="no" > No </input>
+			</div>
+		</div>
+	</div>
+	<div class="guessphraseform" id="guessphraseform" name="guessphraseform">
+		<label class="guessphrase_label">
+			Please provide a guessphrase:
+			<input name="guessphrase" type="text"></input>
+		</label>
+	</div>
+</div>
+<div class="form_group">
+	<button class="btn btn-primary" name="submit" type="submit">
+		Submit
+	</button>
+</div>
+</form>
+
+
+{% endblock %}

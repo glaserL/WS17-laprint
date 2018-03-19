@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body%}
+<p>
+	Welcome to Fingerprinting for Learning Analytics, a sample page for creating fingerprints for visiting users. We created <em>{{stats.c|safe}} fingerprints</em> already. 
+</p>
+<p>
+	If you want to help, please fill out the form that is linked below. I will then create a fingerprint of your browser. To test how well this technique performs you will be asked to provide a phrase or a word that I will connect with that fingerprint. This can be anything, but it should be individual to you to remember it easily. Also, I will try to figure out, if you have already visited the site and present you that phrase. 
+</p>
+<p>
+	If you agree to collecting your browser fingerprint, click below. I will only collect these for a seminar task and discard them afterwards.
+</p>
+<div class = "Fingerprintlink">
+	<a href = "{{ url_for('laprint.fingerprint') }}"><button>Add/Check your fingerprint</button></a>
+</div>
+{% endblock %}

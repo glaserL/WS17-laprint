@@ -1,0 +1,5 @@
+body 		{font-family: 'Helvetica'; background: #eee; }
+a, h1, h2 	{color: #377ba8;}
+h1, h2		{font-family: 'Helvetica', serif; margin: 0;}
+em			{color: #377ba8;}
+.form_group {margin-top: 3em; padding-left:2em;}
