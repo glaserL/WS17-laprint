@@ -1,0 +1,73 @@
+\documentclass[12pt,a4paper]{article}
+
+%%%% Includes
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{color}
+
+\usepackage{wrapfig} % text wrapping figures
+\usepackage{subcaption}
+
+\usepackage{graphicx} % images
+
+\usepackage{setspace}
+
+\usepackage{hyperref}
+
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\onehalfspacing
+
+
+%%%% general information %%%%
+\title{browser fingerprinting for Learning Analytics}
+\author{Luis Glaser}
+\date{2018 \\ March \\ 20}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%% TITLEPAGE BEGIN %%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\centering
+    {\scshape\LARGE Institut für Informatik\par}
+    {\scshape\Large Goethe Universität Frankfurt am Main\par}
+    \vspace{2cm}
+    {\huge\bfseries Device Fingerprinting for Learning Analytics\par}
+    \vspace{2cm}
+    {\Large\itshape Seminararbeit zu Computational Humanities - Learning Analytics\par}
+    {\large Prof. Dr. Hendrik Drachsler\par}
+    \vfill
+	
+    {\large \today\par}
+    \vspace{1.5cm}
+
+% Bottom of the page
+    Luis Glaser\par
+    Martikelnummer: 5312890\par
+    Informatik B.Sc.\par
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%% TITLEPAGE END %%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{gobble}
+
+\tableofcontents
+\pagebreak
+\pagenumbering{arabic}
+\input{chapters/0-abstract}
+\input{chapters/1-introduction}
+\input{chapters/2-stateoftheart}
+\input{chapters/3-method}
+\input{chapters/4-results}
+\input{chapters/5-conclusion}
+\pagebreak
+\section{References}
+\label{sec:References}
+
+\bibliographystyle{ieeetr}
+\bibliography{LA_bibl.bib}
+\pagebreak
+\input{chapters/6-appendix}
+
+\end{document}

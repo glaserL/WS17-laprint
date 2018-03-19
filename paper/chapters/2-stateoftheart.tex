@@ -1,0 +1,58 @@
+% !TEX root = ../main.tex
+\section{State of the Art} % (fold)
+\label{sec:sota}
+
+
+
+\subsection{Browser Fingerprinting}
+
+%% Definition of fingerprint
+In this paper the term \textit{fingerprint}, if not specified further, will refer to a \textit{browser fingerprint} analogously to the suggestion by Acar and colleagues: ``A [browser] \textit{fingerprint} is a set of system attributes that, for each [browser], take a combination of values that is, with high likelihood, unique, and can thus function as a [browser] identifier.'' \cite{acar_fpdetective_2013}. It should thus be noted, that most of the features that will be discussed in section \ref{subsec:fpatt} will focus on \textit{browser fingerprinting}. Features like the \texttt{User-Agent} String or most of the features extracted via JavaScript can differ from browser to browser. Fingerprinting across different browsers on one machine introduce another level of complexity. Then, multiple \textit{browser fingerprints} need to be merged into one \textit{device fingerprint} \cite{cao_cross-browser_2017}.
+
+As already hinted, browser attributes can add different levels of value for fingerprinting. Some attributes may have only a limited number of states or be shared between many devices (e.g. boolean variables or coarse OS version). Other attributes contribute a lot to the quality of a fingerprint like the list of fonts \cite{acar_fpdetective_2013,laperdrix_beauty_2016}. Thus, the likelihood of uniqueness does not only increase by the number of values we extract, but also by the quality of those values. 
+
+Some of these areas from which browser attributes can be extracted are rather new, like the \texttt{WebGL API} and all features of the \texttt{HTML5 canvas} element. Others are on the way to be phased out like \texttt{Flash}, \texttt{Silverlight} or in-browser \texttt{Java}, as Laperdrix and colleagues have already seen in their dataset \cite{laperdrix_beauty_2016}.
+
+Research about web fingerprinting does not only focus on how values to differentiate are generated, but also how other identifiers can be persistently saved. Acar and colleagues have pointed out that content providers use cookie syncing to further keep alive a cookie, even after users have cleared their cookies and cache \cite{acar_web_2014}. This technique might be valuable when applying it to Learning Analytics since it could be used to preserve a students history within restricted environments like computer labs and others.
+
+The possibilities and limits of fingerprinting have found recent attention in research. Their work has been focused on three main areas. (1) Discovery of new attributes that can be used to fingerprint \cite{murdoch_hot_2006,mowery_pixel_2012,fifield_fingerprinting_2015}, (2) studies that try to test the effectiveness of browser fingerprinting \cite{laperdrix_beauty_2016,eckersley_how_2010,nikiforakis_cookieless_2013} and (3) find ways to detect websites that employ someway of fingerprinting \cite{nikiforakis_cookieless_2013,acar_fpdetective_2013,acar_web_2014}. 
+For the purpose of this research, we will mainly address studies from (1) and (2). (3) will be useful to us for looking at how the industry already uses this technology and what we can learn from that when transferring to Learning Analytics.
+
+\subsection{Fingerprintable Attributes}
+\label{subsec:fpatt}
+
+In this section we will discuss different fingerprinting attributes, how we can obtain them and their quality if they have been tested already.
+
+It must be noted, that the enumeration in Table \ref{fptable} is not exhaustive, it only contains attributes that have either been mentioned in multiple papers or that have been empirically studied in at least one. Eckersley also mentions fingerprinting irregularities within the TCP/IP stack, clock skew and others \cite{eckersley_how_2010}.
+The available fingerprinting techniques presented below are not exclusive to each other but are most valuable when combined in order to increase the quality of a browsers fingerprint.
+%%
+\subsubsection{HTTP-Header}
+\label{sota:httpheader}
+The most straightforward source of fingerprintable attributes is the \texttt{HTTP\-Header}. It's being sent with every request and response message and can thus be obtained fairly easily. A variety of them is context-dependent, like the \texttt{referer} field, which thus are not useful for fingerprinting. The permanent ones have already been exploited by a few studies \cite{laperdrix_beauty_2016,eckersley_how_2010} and proven to contribute significantly to the diversity of fingerprints.\footnote{Shannon's entropy for the AmIUnique dataset was $0.570$, $0.531$ for the Panopticlick dataset \cite{laperdrix_beauty_2016}.} 
+
+The \texttt{HTTP-Header} becomes even more important on mobile devices, since applications and even mobile carriers are customizing the \texttt{User-Agent} Attribute of the \texttt{HTTP-Header} which increases the likelihood of discriminating information\cite{laperdrix_beauty_2016}. Some browser extensions offer spoofing of the \texttt{User-Agent} String. This, counterintuitively, makes the browser more distinguishable because unless many other browser share this spoofed string, the group they share the string with is smaller then a basic wide spread \texttt{User-Agent} string \cite{eckersley_how_2010}.
+
+
+\subsubsection{Fonts}
+\label{sota:fonts}
+Fingerprinting characteristics in browsers based on their displayed font can be carried out in two ways. Either by (1) fingerprinting the set of available fonts of a browser and secondly by fingerprinting the (2) rendering process of single symbols of a font
+
+(1) The variety of fonts installed on a device can be very revealing as found by Laperdrix and colleagues \cite{laperdrix_beauty_2016}. These can either be revealed directly via browser plug-ins like Flash or Java. When collecting the list of fonts from these sources they are unordered thus adding additional entropy by the order they are returned in \cite{nikiforakis_cookieless_2013}. Modern privacy oriented browsers already block these types of direct enumeration of fonts \cite{fifield_fingerprinting_2015}. These can be bypassed by rendering a string of a given font, measuring its dimensions and comparing them to a fall-back font named \texttt{"Non-Existent-Font"} or something similar. If the dimensions differ, the font is available in the browser. Furthermore, Font Fingerprinting is even more revealing on mobile devices since many manufacturers on Android offer their own designs, thus enabling fingerprinting down to device level \cite{acar_fpdetective_2013}.
+
+The more browser centered approach targets the rendering of font directly. (2) This renders single glyphs from Unicode and compares the hashes. Unlike the previous variant fonts aren't targeted directly but called by general \texttt{CSS}-names like \texttt{sans-serif} or \texttt{cursive}. This discloses both browser specific design choices and device particularities of the OS font rendering engine. \cite{fifield_fingerprinting_2015}
+
+Of course, all these processes are performed off the screen and is thus transparent to the user. Fifield and Egelman have found the latter technique to be more discriminating then the \texttt{User-Agent}. Their font metric measured $1.5$ times the entropy of the \texttt{User-Agent} string \cite{fifield_fingerprinting_2015} .
+
+\subsubsection{Canvas}
+\label{sota:canvas}
+\cite{mowery_pixel_2012} Canvas fingerprinting is only little more complex than font fingerprinting but is able to add further diversity to a fingerprint. Introduced with \texttt{HTML5}, the \texttt{canvas}-Object enables tighter interaction with a device's underling hardware. Intended for enabling more sophisticated Web Applications, this can also be used to extract quirks not only from browser implementations but also from a device's hardware \cite{mowery_pixel_2012}. The fingerprinting works by drawing forms or text on this canvas object and then collecting the hashed return values from \texttt{toDataURL(type)}. Since only the hashed value ends up in the fingerprint, this can also be performed rather easily. 
+Mowery and Shacham have also suggested drawing 3D forms onto a \texttt{canvas} to add more complexity, but Laperdrix and colleagues found these to be non consistent \cite{laperdrix_beauty_2016}.\footnote{resizing the browser window and redoing the test returned other values.} However, it's consistent and viable for drawing 2D forms, fonts or extracting values like the GPU vendor or make.
+
+\subsection{Further possibilities for fingerprinting}
+\label{subsec:furtherposs}
+
+This section will point out additional elements that can be fingerprinted but have either not been studied extensively yet or not in the connection to fingerprintability. However they need to be pointed out, in case the intended use case in Learning Analytics especially profits from one or more of them.
+
+Another way to find unique features of a browser is not within the realm of values but more in the realm of attributes themselves. Browser functionality today is relatively standardized, but the implementations still offer some unique features which can be fingerprinted as well, for example the \texttt{screen.\underline{moz}Brightness} in Mozilla Firefox or \texttt{navigator.\underline{ms}DoNotTrack} in Internet Explorer \cite{nikiforakis_cookieless_2013}.
+
+Also, the viability of fingerprinting characteristics are different between mobile and desktop devices. As there are no plug-ins or \texttt{Flash} on mobile devices, the bulk part of diverseness must come from other values as the User-Agent.\footnote{Phone Carriers include their name in addition phone model and other information in the \texttt{User-Agent}.}\cite{laperdrix_beauty_2016}.

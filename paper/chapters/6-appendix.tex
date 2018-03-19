@@ -1,0 +1,33 @@
+% !TEX root = ../main.tex
+\appendix
+
+\section{Tables}
+\label{fptable}
+
+\begin{table}[!h]
+\centering
+\footnotesize
+\begin{tabular}{|p{3.5cm}|p{2cm}|p{2cm}|p{3cm}|c|}
+Attribute-Name & Source & Remark & Example Value & Studies\\ \hline \hline
+\texttt{User-Agent} & \texttt{HTTP-Header} & &Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:58.0) Gecko/20100101 Firefox/58.0 & \cite{laperdrix_beauty_2016,eckersley_how_2010} \\\hline
+\texttt{accept} & \texttt{HTTP-Header} &  & text/html, application/xhtml+xml, application/xml; q=0.9, */*; q=0.8 & \cite{laperdrix_beauty_2016,eckersley_how_2010}\\\hline
+\texttt{accept-encoding} & \texttt{HTTP-Header} & & gzip, deflate & \cite{laperdrix_beauty_2016,eckersley_how_2010} \\\hline
+\texttt{accept-language} &\texttt{HTTP-Header} & &de,en-US;q=0.7,en;q=0.3 & \cite{laperdrix_beauty_2016,eckersley_how_2010} \\ \hline
+List of HTTP-Headers & \texttt{HTTP-Header} & & see above & \cite{laperdrix_beauty_2016} \\\hline
+List of Fonts & \texttt{Flash}, \texttt{Java}, \texttt{JavaScript} & & Abyssinica SIL, Aharoni CLM, AR PL UMing CN, $\ldots$ \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016} \\\hline
+List of plug-ins & \texttt{JavaScript} & & Plugin 1: Chrome PDF Viewer, Plugin 2: $\ldots$ \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016} \\ \hline
+\texttt{Timezone} & \texttt{JavaScript} & & -60 (UTC+1) \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016} \\\hline
+Screen Resolution \& Color Depth & \texttt{JavaScript} & & 1920x1200x24 \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016,acar_fpdetective_2013}\\ \hline
+Cookies enabled & \texttt{JavaScript} & & yes \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016} \\\hline
+Use of local/session storage & \texttt{JavaScript} & & yes \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016} \\\hline
+\texttt{navigator.platform} & \texttt{JavaScript} & spoofed \texttt{User-Agent}& MacIntel & \cite{laperdrix_beauty_2016,acar_fpdetective_2013} \\ \hline
+\texttt{WebGL Renderer} & \texttt{JavaScript} & & NVIDIA Corporation \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016,mowery_pixel_2012} \\\hline
+\texttt{WebGL Vendor} & \texttt{JavaScript} & & GeForce GTX 650 \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016,mowery_pixel_2012} \\\hline
+Do Not Track Flag & \texttt{JavaScript} & & yes & \cite{laperdrix_beauty_2016} \\\hline
+HTML5-canvas & \texttt{JavaScript} & & & \cite{laperdrix_beauty_2016,mowery_pixel_2012} \\\hline
+Usage of an AdBlocker & \texttt{JavaScript} & & no \cite{laperdrix_beauty_2016} & \cite{laperdrix_beauty_2016} \\\hline
+IP Address & IP Layer & Mostly for respawning & \texttt{127.0.0.1} & \cite{yen_host_2012} \\\hline
+Browser Vendor \& Version & Feature availability & & Firefox/58.0 & \cite{nikiforakis_cookieless_2013} \\ \hline
+\end{tabular}
+\caption{Recently studied browser attributes}
+\end{table}

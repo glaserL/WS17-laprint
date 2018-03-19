@@ -1,0 +1,21 @@
+% !TEX root = ../main.tex
+\section{Introduction} % (fold)
+\label{sec:introduction}
+
+With the advent of online learning platforms like moodle a way to centralize the learning experience for students has come up. Students are able to perform tasks, upload their exercises or consume additional study material on web platforms that might be offered by their school or university. 
+But not only material that is being dedicatedly distributed by an institution is also used for learning by students. Many students use external material. This might be used for deepening their understanding of the current topic or seeking additional aid for exercising. This again limits the ability of a tutor or teacher to monitor their students' activities.
+
+Furthermore, Recommendation Systems play a central role in Technology Enhanced Learning Environments. As soon as the recommendation is based in some way on what peers or other students in general have used to study, another problem arises: 
+There needs to be some way to collect data on who is viewing what content, maybe even enriched by quality or satisfaction measures \cite{ricci_panorama_2015}. This might be feasible when the content in question is held by one provider only, but becomes increasingly harder, when students are using external content, be it online video tutorials or \textit{MOOCs}. Despite being material from external sources, they might provide additional value to a students curriculum. 
+
+In order to also incorporate these external materials into a learning platform or a recommendation system, their usage by a student needs to be tracked in someway. This might still be possible when using in-house technology, but will be made increasingly harder when students are using their private devices. 
+
+One approach from the content providers side would be, to track their visitors and then associate them with the student that is using a Technology Enhanced Learning Environment in question. This would hold multiple benefits: \begin{itemize}
+\item (1) No form of user account would be necessary, which could broaden the scope of used learning material beyond usual hubs users often have user accounts with.
+\item (2) Is ideally independent from a users device, \cite{yen_host_2012,cao_cross-browser_2017,acar_web_2014} which makes it lightweight for a user and sustainable for a learning platform. 
+\end{itemize}
+
+This opens the topic of this paper, accessing the usage of fingerprinting in the field of Learning Analytics. The main focus will be on recent research on fingerprinting while keeping the education focused usage scenario in mind.
+
+The paper will be structured as follows. Section \ref{sec:sota} will first give an explanation on what fingerprinting does and how we can use it. Section \ref{subsec:fpatt} will enumerate and discuss possible and combinable ways to fingerprint a given browser, while keeping resource efficiency in mind. We then propose criteria what such a fingerprinting tool should offer and present a tool that has been used to fingerprint browsers in Section \ref{sec:method}. Section \ref{sec:results} will then discuss the results of the research undertaken and suggest a few ways of improvement. Section \ref{sec:conclusion} will then conclude.
+ 

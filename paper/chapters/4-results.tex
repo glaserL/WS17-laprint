@@ -1,0 +1,58 @@
+% !TEX root = ../main.tex
+\section{Results} % (fold)
+\label{sec:results}
+
+
+\begin{wrapfigure}{r}{0.4\linewidth}
+\centering
+\begin{tabular}{|r|c|}
+\hline
+Total Fingerprints & $34$ \\ \hline
+Valid Fingerprints & $32$ \\ \hline
+Unique Fingerprints & $26$\\ \hline
+\end{tabular}
+\caption{Descriptives}
+\label{fig:fpstats}
+\vspace{-0.25in}
+\end{wrapfigure}
+
+
+We ran the site from March 14. until March 19, mostly visited by friends and colleagues, see Figure \ref{fig:fpstats} for general metrics. We excluded $2$ of the total $34$ collected fingerprints because they did not have a \emph{guessphrase} associated. Thus we cannot decide whether they stem from the same browser or different ones. We see on first glance that roughly $\frac{3}{4}$ of incoming devices where in an anonymity set of size $1$ only by collecting the \texttt{HTTP-Header}. It must be noted that it's likely that this fraction rapidly drops for larger $N$, as Laperdrix and colleagues found it to only directly identify $\frac{3}{4}$ of visiting devices \cite{laperdrix_beauty_2016}. Similar to their findings, the \texttt{User-Agent} attribute adds the most diversity to the fingerprint, which can be seen in Figure \ref{res:fig:headers}.
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+\centering
+\footnotesize
+\begin{tabular}{|p{2cm}|p{1cm}|}
+\hline
+\texttt{HTTP-header} attribute & unique values \\ \hline\hline
+\texttt{user-agent} & $24$ \\\hline
+\texttt{accept} & $5$ \\ \hline 
+\texttt{accept encoding} & $1$ \\\hline
+\texttt{accept language} & $10$ \\\hline
+\end{tabular}
+\caption{Fingerprints}
+\label{res:fig:headers}
+\end{wrapfigure}
+The fingerprinting service we ran also asked visiting users for giving a \emph{guessphrase} that we associated with their fingerprint. This was inteded to make the service more engaging. Furthermore we encouraged them to revisit in order to find out, whether their fingerprint has changed. Finally this enabled us to have a look at precision and recall. Surprisingly despite only $75\%$ of fingerprints being unique, both recall and precision were either $1$ or rather close to $1$, see Figure \ref{fig:precrec}. 
+
+While being seemingly good news at first, it also seems rather unlikely, having only $\frac{3}{4}$ of unique fingerprints. Since one user personally reported that they already saw a \emph{guessphrase} when visiting for the first time with a browser, we assume that users did not fill out the form completely if the \emph{guessphrase} did not match. Unfortunately, we did not track this case when running the site. 
+\begin{wrapfigure}{r}{0.4\linewidth}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Metric & Value \\ \hline
+Total & $79$\\\hline
+True Positive & $46$\\\hline
+False Positive & $2$\\\hline
+True Negative & $31$\\ \hline
+False Negative & $0$\\\hline \hline 
+Precision & $0.95$ \\ \hline
+Recall & $1.00$\\\hline
+\end{tabular}
+\caption{Precision \& Recall}
+\label{fig:precrec}
+\vspace{-0.25in}
+\end{wrapfigure}
+In order to test the validity of our results, we ran a test in which we tried to guess the \emph{guessphrase} of the fingerprints we had already collected. This gave us a value of $0.81$ for precision, which seems more reasonable. Unfortunately we couldn't retrieve recall from the simulation since constructing negatives by splitting our dataset would have decreased the number of fingerprints too much to still make reasonable statements about them.
+
+After our test had ended, multiple users reported via mail, that the script was completely unable to recognize their devices. After looking at the corresponding fingerprints, we saw that they indeed were unique. This occurred with two Samsung smartphones, which suggests the frontend part of our tool was faulty and did not change the display accordingly. 
